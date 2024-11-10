@@ -1,10 +1,11 @@
 
+
 import java.util.Scanner;
 
-public class ATM {
-    private BankAccount account;
+ class ATMM {
+    private Bankaccount account;
 
-    public ATM(BankAccount account) {
+    public ATMM(Bankaccount account) {
         this.account = account;
     }
 
@@ -58,3 +59,51 @@ public class ATM {
     }
 }
 
+ class Bankaccount {
+    private double balance;
+
+    public Bankaccount(double initialBalance) {
+        this.balance = initialBalance;
+    }
+
+    // Deposit method
+    public void deposit(double amount) {
+        if (amount > 0) {
+            balance += amount;
+            System.out.println("Deposit successful. Amount deposited: " + amount);
+        } else {
+            System.out.println("Invalid deposit amount.");
+        }
+    }
+
+    // Withdraw method
+    public boolean withdraw(double amount) {
+        if (amount > balance) {
+            System.out.println("Insufficient balance.");
+            return false;
+        } else if (amount <= 0) {
+            System.out.println("Invalid withdrawal amount.");
+            return false;
+        } else {
+            balance -= amount;
+            System.out.println("Withdrawal successful. Amount withdrawn: " + amount);
+            return true;
+        }
+    }
+
+    // Check balance method
+    public double getBalance() {
+        return balance;
+    }
+}
+
+
+
+public class ATMSimulator {
+    public static void main(String[] args) {
+        // Initialize the bank account with an initial balance
+        Bankaccount account = new Bankaccount(1000.0); // Starting balance of 1000
+        ATMM atm = new ATMM(account);
+        atm.displayMenu();
+    }
+}
